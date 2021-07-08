@@ -1,4 +1,4 @@
-public class System implements Comparable<System>{
+public class System{
   public float mass;
   public PVector location;
   public PVector velocity;
@@ -12,29 +12,26 @@ public class System implements Comparable<System>{
     float a = atan2(location.x - center.x, center.y-location.y);
     if (velocity.x == 0 && velocity.y == 0) {
       velocity = new PVector(cos(a + PI), sin(a + PI)).mult(sqrt(mass_) / sqrt(r) / 17);
+      //initial velocity, I still need to work on making the radius hold constant from the start
     }
-    velocity.add(new PVector(cos(a + PI / 2), sin(a + PI / 2)).mult(mass_ / pow(r, 2) / 30));
-    //vel.sub(new PVector(cos(a+PI/2), sin(a+PI/2)).mult(m_/r/r/r/r/r));
-    location.add(velocity);
+    velocity.add(new PVector(cos(a + PI / 2), sin(a + PI / 2)).mult(mass_ / pow(r, 2) / 30).mult(((speed<1)? speed : 1)));
+    //apply force
+    location.add(velocity.copy().mult(((speed<1)? speed : 1)));
+    //update location
   }
   public void show() {
-    strokeWeight(sqrt(map(mass*mass, 0, 3600, 1, 25)));
+    int weight = round(sqrt(map(mass*mass, 0, 3600, 1, 25)));
+    marker(massToColor(mass), weight, location.x, location.y);
+    //render dots
+  }
+  private color massToColor(float mass){
     if (mass > 3.2) {
-      stroke(25, 25, 255, 200);
-    } else if (mass > 1.7) {
-      stroke(200, 200, 255, 200);
-    } else if (mass > 1.1) {
-      stroke(170, 170, 100, 200);
-    } else {
-      stroke(120 + 130 * mass, 250 * mass, 50 * mass, 200);
+      return color(25, 25, 255, 200);
+    } if (mass > 1.7) {
+      return color(200, 200, 255, 200);
+    } if (mass > 1.1) {
+      return color(170, 170, 100, 200);
     }
-    point(location.x, location.y);
+    return color(120 + 130 * mass, 250 * mass, 50 * mass, 200);
   }
-  public float getMass(){
-    return mass;
-  }
-  public int compareTo(System compared) {
-      float compareQuantity = compared.getMass(); 
-      return round(compareQuantity - this.mass);
-    }
 }
