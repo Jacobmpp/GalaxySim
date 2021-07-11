@@ -1,4 +1,5 @@
 # GalaxySim
+![image](https://user-images.githubusercontent.com/28025999/124854987-ddc47080-df6d-11eb-80ad-3269b1b80790.png)
 I basic simulation of the orbits of star systems in a galaxy with the possibility of added functionality in the future.
 # Controls
 \ - Toggle Debug data
