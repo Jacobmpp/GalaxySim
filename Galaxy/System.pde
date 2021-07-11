@@ -11,10 +11,10 @@ public class System{
     float r = sqrt(pow((center.x - location.x), 2) + pow((center.y - location.y), 2)) * 10;
     float a = atan2(location.x - center.x, center.y-location.y);
     if (velocity.x == 0 && velocity.y == 0) {
-      velocity = new PVector(cos(a + PI), sin(a + PI)).mult(sqrt(mass_) / sqrt(r) / 17);
+      velocity = new PVector(cos(a + PI), sin(a + PI)).mult(sqrt(G * mass_ / r));
       //initial velocity, I still need to work on making the radius hold constant from the start
     }
-    velocity.add(new PVector(cos(a + PI / 2), sin(a + PI / 2)).mult(mass_ / pow(r, 2) / 30).mult(((speed<1)? speed : 1)));
+    velocity.add(new PVector(cos(a + PI / 2), sin(a + PI / 2)).mult(mass_ / pow(r, 2)).mult(((speed<1)? speed : 1)));
     //apply force
     location.add(velocity.copy().mult(((speed<1)? speed : 1)));
     //update location
@@ -27,6 +27,8 @@ public class System{
   private color massToColor(float mass){
     if (mass > 3.2) {
       return color(25, 25, 255, 200);
+    } if (mass > 2.0) {
+      return color(255, 200, 200, 200);
     } if (mass > 1.7) {
       return color(200, 200, 255, 200);
     } if (mass > 1.1) {

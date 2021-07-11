@@ -1,4 +1,5 @@
 System[] systemArray;
+float G = .1;
 PVector center; //Precalculated center of mass to simplify physics and reduce error
 float totalMass = 0; //Sum of all system masses
 float zoom = 2; //used for camera movement
@@ -9,7 +10,9 @@ int textSize = 30;
 void setup() {
   textSize(textSize);
   fullScreen(P2D);
-  systemArray = new System[8000];
+  ellipseMode(CENTER);
+  noFill();
+  systemArray = new System[10000];
   center = new PVector(0, 0);
   for (int i = 0; i < systemArray.length; i++) {
     systemArray[i] = new System(randMass(), randRadius(), random(PI * 2));
@@ -50,7 +53,7 @@ void keyPressed() {
   if (speed < 0)speed = 0;
 }
 void draw() {
-  background(0, 0, 0);
+  background(0);
   strokeWeight(1);
   stroke(255);
   /*totalMass = 0;
