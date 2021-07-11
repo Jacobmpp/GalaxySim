@@ -2,7 +2,7 @@ System[] systemArray;
 PVector center; //Precalculated center of mass to simplify physics and reduce error
 float totalMass = 0; //Sum of all system masses
 float zoom = 2; //used for camera movement
-int speed = 1; //Modulates simulation speed
+float speed = 1; //Modulates simulation speed
 boolean debug = true; //Show debug data toggles with '\' key
 PVector displacement; //Amount moved by click and drag
 int textSize = 30;
@@ -72,7 +72,7 @@ void draw() {
   //render debug center of mass
   camera(1);
   if (debug) {
-    text("Speed: " + ((float)round(speed * 100)) / 10 + " (change with ,.<>/)", 0, textSize);
+    text("Speed: " + ((float)round(speed * 100)) / 100 + " (change with ,.<>/)", 0, textSize);
     text("FPS: " + ((float)round(frameRate * 10)) / 10, 0, textSize * 2);
     text("Zoom: " + ((float)round(zoom * 10)) / 10 + " (scroll)", 0, textSize * 3);
     text("(\\ = toggles debug)", 0, textSize * 4);
